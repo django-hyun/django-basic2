@@ -1,0 +1,19 @@
+{% extends "accounts/layout.html" %}
+
+{% block content %}
+프로필 정보: <br />
+<h2>User : {{user}} </h2>
+{{user.is_authenticated }} <br />
+{{ user.profile.bio}} <br />
+{{ user.profile.website_url }}
+
+<hr>
+<button>
+    <a href="{% url 'accounts:profile_edit' %}">프로필 수정</a>
+</button> &nbsp;
+
+<button>
+    <a href="{% url 'accounts:password_change' %}">비밀번호 변경</a>
+</button>
+
+{% endblock %}

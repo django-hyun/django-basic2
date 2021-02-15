@@ -1,0 +1,33 @@
+{% extends "instagram/layout.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<div class="container">
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-3" style="text-align:center;">
+            <img src="{{page_user.avatar_url}}" alt="" class="rounded-circle" style="width:160px;" />
+        </div>
+        <div class="col-sm-9">
+            {{ page_user.username }}
+            <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary btn-sm">Edit Profile</a>
+            <hr>
+            {{ post_list_count }} posting , 0 followers, 0 following
+            <hr>
+            {% if is_follow %}
+                <a href="{% url 'accounts:user_unfollow' page_user.username %}">UnFollow</a>
+            {% else %}
+                <a href="{% url 'accounts:user_follow' page_user.username %}">Follow</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        {% for post in post_list %}
+        <div class="col-sm-4 mb-3">
+            <img src="{%thumbnail post.photo 350x350 crop %}" alt="{{post.caption}}" width="100%" />
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
